@@ -32,7 +32,8 @@ class HangmanGame:
     pass
 
   def display_guessed_letters(self):
-    pass
+    for letter in Word.letters:
+      print(letter)
   
     
 
@@ -40,16 +41,18 @@ class Word:
   def __init__(self, word):
     self.word = word #The target word
     self.hidden_word = [] #An array that stores all of the indexes of self.word that the player has guessed
+    self.letters = []
+    self.found_letters = []
 
   def guess_letter(self, char):
     counter = 0 #Keeps track of the index of the array that we are looping through
-    print("word:", self.word)
-
+    self.letters.append(char)
+    
     for letter in self.word: #loops for every letter in self.word
       if char == letter: #Checks for the match
-        if counter not in self.hidden_word: #stops double ups
-          self.hidden_word.append(counter) #add the index of the match if the player makes a correct match
-      counter += 1 #increments the index counter before the next check
+        if letter not in self.found_letters: #stops double ups
+          self.found_letters.append(char)
+  
 
     print(self.hidden_word) #For debugging
 
